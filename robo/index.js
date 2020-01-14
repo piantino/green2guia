@@ -1,11 +1,13 @@
-import Crawler from "crawler";
+var Crawler = require("crawler");
+
+Crawler.debug = true;
 
 var crawler = new Crawler({
     rateLimit: 2000,
     maxConnections: 1
 });
 
-function iniciar(cpf, pwd) {
+function Robo(cpf, pwd, callback) {
 
     crawler.direct({
         uri: "https://www.grupogreencard.com.br/sysweb/site/loginUsuario",
@@ -30,20 +32,22 @@ function iniciar(cpf, pwd) {
             const captchaValue = captchaOptions[captcha];
             console.info('Captcha value', captchaValue);
 
-            login(cpf, pwd, captchaValue);
+            login(cpf, pwd, captchaValue, callback);
         }
     });
     
 }
  
-function login(cpf, pwd, captchaValue) {
+function login(cpf, pwd, captchaValue, callback) {
         
         
     crawler.direct({
         uri: "https://www.grupogreencard.com.br/sysweb/site/loga_usuario",
-        cpf: cpf,
-        senha: pwd,
-        'captcha-value': captchaValue,
+        formData: {
+            cpf: cpf,
+            senha: pwd,
+            'captcha-value': captchaValue
+        },
         callback: function (error, res, done) {
             if(error){
                 console.log(error);
@@ -51,9 +55,10 @@ function login(cpf, pwd, captchaValue) {
             }
             console.log('Grabbed', res.statusCode,  res.body.length, 'bytes');
             console.log('Error:', res.$("#erro p").text());
+
+            callback(res.body);
         }
-    });   
-    
+    });
 }
 
-iniciar(1, 2);
+module.exports = Robo;
