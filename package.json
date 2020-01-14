@@ -1,0 +1,30 @@
+{
+  "type": "module",
+  "name": "green2guia",
+  "version": "1.0.0",
+  "description": "Robô para integração entre o greencard e guiabolso",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --experimental-modules ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piantino/green2guia.git"
+  },
+  "keywords": [
+    "Greencard",
+    "Guiabolso",
+    "Robo",
+    "Crawler"
+  ],
+  "author": "Andre Piantino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/piantino/green2guia/issues"
+  },
+  "homepage": "https://github.com/piantino/green2guia#readme",
+  "dependencies": {
+    "crawler": "^1.2.1"
+  }
+}
