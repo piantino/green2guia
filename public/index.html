@@ -1,13 +1,57 @@
 <html>
 
 <head>
-  <title>Express</title>
+  <title>Green2Guia</title>
+
+  <!-- bootstrap -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+  <div class="parallax"></div>
+  <div id="app" class="container">
+    <h1>Green2Guia</h1>
+    <p>Envie os lançamentos do seu GreenCard para o GuiaBolso.</p>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label>CPF</label>
+                <input class="form-control" v-model="greencard.cpf" placeholder="Insira o seu CPF">
+              </div>
+              <div class="form-group">
+                <label>Senha</label>
+                <input class="form-control" v-model="greencard.password" type="password" placeholder="Insira a sua senha de internet">
+              </div>
+              <button type="button" class="btn btn-primary" v-on:click="getExtract()">Visualizar extrato</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    <div class="col-md-8" v-if="extract">
+      <ul>
+        <li v-for="item in extract">
+          {{ item.date }} {{ item.value}} {{ item.text }}
+        </li>
+      </ul>
+    </div>
+
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="javascripts/app.js"></script>
 </body>
 
 </html>
