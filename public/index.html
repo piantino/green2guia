@@ -20,30 +20,37 @@
     <div class="row">
 
       <div class="col-md-4">
-        <div class="card">
+        <div class="card bg-secondary">
+          <img class="card-img-top" src="images/undraw_investment_xv9d.svg" alt="Card image cap">
           <div class="card-body">
-            <form>
+            <h5 class="card-title">Visualize seu extrato</h5>
+            <h6 class="card-subtitle mb-2">Informe seu CPF e senha no GreenCard</h6>
+            <div class="alert alert-danger" v-if="loginError">{{loginError}}</div>
+            <form v-if="!extract" class="mt-4">
               <div class="form-group">
                 <label>CPF</label>
-                <input class="form-control" v-model="greencard.cpf" placeholder="Insira o seu CPF">
+                <input class="form-control" v-model="greencard.cpf" placeholder="Digite o seu CPF">
               </div>
               <div class="form-group">
                 <label>Senha</label>
-                <input class="form-control" v-model="greencard.password" type="password" placeholder="Insira a sua senha de internet">
+                <input class="form-control" v-model="greencard.password" type="password" placeholder="Senha do App (não a do cartão)">
               </div>
-              <button type="button" class="btn btn-primary" v-on:click="getExtract()">Visualizar extrato</button>
+              <button type="button" class="btn btn-primary" v-on:click="getExtract()">Visualizar</button>
             </form>
           </div>
         </div>
       </div>
 
-    <div class="col-md-8" v-if="extract">
-      <ul>
-        <li v-for="item in extract">
-          {{ item.date }} {{ item.value}} {{ item.text }}
-        </li>
-      </ul>
-    </div>
+      <div class="col-md-8" v-if="extract">
+        <h4>Últimos lançamentos <small>(90 dias)</small></h4>
+        <div class="list-group list-group-flush mt-4 mb-4">
+          <div v-for="item in extract" class="list-group-item">
+            <input type="checkbox">
+            {{ item.date }} {{ item.value}} {{ item.text }}
+          </div>
+        </div>
+        <button class="btn btn-primary">Enviar para o GuiaBolso</button>
+      </div>
 
     </div>
 
