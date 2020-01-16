@@ -12,7 +12,6 @@
 </head>
 
 <body>
-  <div class="parallax"></div>
   <div id="app" class="container">
     <h1>Green2Guia</h1>
     <p>Envie os lançamentos do seu GreenCard para o GuiaBolso.</p>
@@ -44,9 +43,10 @@
       <div class="col-md-8" v-if="extract">
         <h4>Últimos lançamentos <small>(90 dias)</small></h4>
         <div class="list-group list-group-flush mt-4 mb-4">
-          <div v-for="item in extract" class="list-group-item">
-            <input type="checkbox">
-            {{ item.date }} {{ item.value}} {{ item.text }}
+          <div v-for="item in extract" class="list-group-item d-flex justify-content-between">
+            <div>{{ item.date }}</div>
+            <div>{{ item.text }}</div>
+            <div>{{ item.value}}</div>
           </div>
         </div>
         <button class="btn btn-primary">Enviar para o GuiaBolso</button>

@@ -7,7 +7,7 @@ const EXTRACT_URL = "https://www.grupogreencard.com.br/sysweb/site/usuarios/extr
 
 const COLUMNS_NAME = ["date", "value", "text"];
 
-function Robo(cpf, pwd, callback) {
+function getExtract(cpf, pwd, callback) {
 
     var cookieJar = request.jar();
 
@@ -89,11 +89,14 @@ function extract(params, cookieJar, callback) {
         let list = [];
 
         $($("table").get(1)).find("tbody tr").each(function(i, e) {
-            let item = {}
-            $(e).find("td").each(function(j, td) {
-                const value = $(td).text().trim();
-                item[COLUMNS_NAME[j]] = value;
-            });
+            let item = {};
+
+            const tds = $(e).find("td");
+            item.date = $(tds[0]).text().trim();
+            item.value = $(tds[1]).text().trim().replace('R$ ', '');
+            item.text = $(tds[2]).text().trim();
+            item.positive = item.text === 'DISPONIB. BENEFICIO';
+            
             list.push(item);
         });
 
@@ -101,4 +104,6 @@ function extract(params, cookieJar, callback) {
     }).form(params);
 }
 
-module.exports = Robo;
+module.exports = {
+    getExtract : getExtract
+};
