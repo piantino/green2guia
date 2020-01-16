@@ -6,6 +6,7 @@ var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
 var greencardsRouter = require('./routes/greencards');
+var guiabolsoRouter = require('./routes/guiabolso');
 
 var app = express();
 
@@ -23,5 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/greencards', greencardsRouter);
+app.use('/guiabolso', guiabolsoRouter);
 
 module.exports = app;

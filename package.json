@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
+    "chromedriver": "^79.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "selenium-webdriver": "^4.0.0-alpha.5"
   }
 }
